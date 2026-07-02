@@ -9,12 +9,7 @@ use Intervention\Image\ImageManager;
 
 class ImageUploadService
 {
-    protected ImageManager $manager;
-
-    public function __construct()
-    {
-        $this->manager = ImageManager::gd();
-    }
+    protected ?ImageManager $manager = null;
 
     /**
      * Resize (if needed), optimize, and store an uploaded image on the
@@ -25,7 +20,7 @@ class ImageUploadService
         $filename = Str::uuid()->toString().'.'.($file->getClientOriginalExtension() ?: 'jpg');
         $path = trim($directory, '/').'/'.$filename;
 
-        $image = $this->manager->read($file->getRealPath());
+        $image = $this->manager()->read($file->getRealPath());
 
         if ($image->width() > $maxWidth) {
             $image->scaleDown(width: $maxWidth);
@@ -45,5 +40,15 @@ class ImageUploadService
         if ($path && Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);
         }
+    }
+
+    /**
+     * The GD driver is only constructed on first actual use, so pages that
+     * never touch an image upload aren't affected if GD/Imagick isn't
+     * available on a given environment.
+     */
+    protected function manager(): ImageManager
+    {
+        return $this->manager ??= ImageManager::gd();
     }
 }
