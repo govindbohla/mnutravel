@@ -2,6 +2,9 @@
 
 @section('title', $package->seoMeta?->meta_title ?? $package->name.' - '.$siteSettings['site_name'])
 @section('meta_description', $package->seoMeta?->meta_description ?? Str::limit(strip_tags($package->description), 160))
+@section('meta_keywords', $package->seoMeta?->meta_keywords ?? $siteSettings['meta_keywords'])
+@section('canonical_url', $package->seoMeta?->canonical_url ?? url()->current())
+@section('og_image', $package->featured_image ? asset('storage/'.$package->featured_image) : $siteSettings['site_logo_url'])
 
 @section('content')
     <section class="section">

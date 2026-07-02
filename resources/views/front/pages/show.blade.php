@@ -2,6 +2,8 @@
 
 @section('title', $page->seoMeta?->meta_title ?? $page->title.' - '.$siteSettings['site_name'])
 @section('meta_description', $page->seoMeta?->meta_description ?? Str::limit(strip_tags($page->content), 160))
+@section('meta_keywords', $page->seoMeta?->meta_keywords ?? $siteSettings['meta_keywords'])
+@section('canonical_url', $page->seoMeta?->canonical_url ?? url()->current())
 
 @section('content')
     <div class="bg-light py-5">

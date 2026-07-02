@@ -2,6 +2,9 @@
 
 @section('title', $service->seoMeta?->meta_title ?? $service->name.' - '.$siteSettings['site_name'])
 @section('meta_description', $service->seoMeta?->meta_description ?? $service->short_description)
+@section('meta_keywords', $service->seoMeta?->meta_keywords ?? $siteSettings['meta_keywords'])
+@section('canonical_url', $service->seoMeta?->canonical_url ?? url()->current())
+@section('og_image', $service->image ? asset('storage/'.$service->image) : $siteSettings['site_logo_url'])
 
 @section('content')
     <section class="section">

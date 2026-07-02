@@ -8,12 +8,19 @@
     <title>@yield('title', $siteSettings['meta_title'])</title>
     <meta name="description" content="@yield('meta_description', $siteSettings['meta_description'])">
     <meta name="keywords" content="@yield('meta_keywords', $siteSettings['meta_keywords'])">
-    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="canonical" href="@yield('canonical_url', url()->current())">
 
+    <meta property="og:site_name" content="{{ $siteSettings['site_name'] }}">
     <meta property="og:title" content="@yield('title', $siteSettings['meta_title'])">
     <meta property="og:description" content="@yield('meta_description', $siteSettings['meta_description'])">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:url" content="@yield('canonical_url', url()->current())">
+    <meta property="og:image" content="@yield('og_image', $siteSettings['site_logo_url'])">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', $siteSettings['meta_title'])">
+    <meta name="twitter:description" content="@yield('meta_description', $siteSettings['meta_description'])">
+    <meta name="twitter:image" content="@yield('og_image', $siteSettings['site_logo_url'])">
 
     <link rel="icon" href="{{ $siteSettings['site_favicon_url'] }}">
 

@@ -2,6 +2,9 @@
 
 @section('title', $vehicle->seoMeta?->meta_title ?? $vehicle->name.' - '.$siteSettings['site_name'])
 @section('meta_description', $vehicle->seoMeta?->meta_description ?? Str::limit(strip_tags($vehicle->description), 160))
+@section('meta_keywords', $vehicle->seoMeta?->meta_keywords ?? $siteSettings['meta_keywords'])
+@section('canonical_url', $vehicle->seoMeta?->canonical_url ?? url()->current())
+@section('og_image', $vehicle->image ? asset('storage/'.$vehicle->image) : $siteSettings['site_logo_url'])
 
 @section('content')
     <section class="section">

@@ -6,6 +6,7 @@ use App\Http\Controllers\Front\EnquiryController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Front\ServiceController;
+use App\Http\Controllers\Front\SitemapController;
 use App\Http\Controllers\Front\TestimonialController;
 use App\Http\Controllers\Front\TourPackageController;
 use App\Http\Controllers\Front\VehicleController;
@@ -28,6 +29,21 @@ Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.in
 
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 Route::post('/enquiry', [EnquiryController::class, 'store'])->name('enquiry.store');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
+Route::get('/robots.txt', function () {
+    $lines = [
+        'User-agent: *',
+        'Disallow: /admin',
+        'Disallow: /login',
+        'Disallow: /register',
+        '',
+        'Sitemap: '.route('sitemap'),
+    ];
+
+    return response(implode("\n", $lines), 200)->header('Content-Type', 'text/plain');
+})->name('robots');
 
 // Catch-all for CMS-managed pages (About Us, Privacy Policy, Terms & Conditions,
 // and any future page created in the admin) - must stay last.
