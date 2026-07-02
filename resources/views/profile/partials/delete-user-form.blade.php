@@ -8,12 +8,12 @@
         </p>
     </header>
 
-    <x-danger-button data-bs-toggle="modal" data-bs-target="#confirm-user-deletion">
+    <x-danger-button data-modal-target="confirm-user-deletion">
         {{ __('Delete Account') }}
     </x-danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" maxWidth="md">
-        <form method="post" action="{{ route('profile.destroy') }}">
+        <form method="post" action="{{ route('admin.profile.destroy') }}">
             @csrf
             @method('delete')
 
@@ -26,7 +26,7 @@
             </p>
 
             <div class="mb-3">
-                <x-input-label for="password" value="{{ __('Password') }}" class="visually-hidden" />
+                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
                 <x-text-input
                     id="password"
                     name="password"
@@ -36,12 +36,12 @@
                 <x-input-error :messages="$errors->userDeletion->get('password')" />
             </div>
 
-            <div class="d-flex justify-content-end gap-2">
-                <x-secondary-button data-bs-dismiss="modal">
+            <div class="d-flex justify-content-end">
+                <x-secondary-button data-modal-dismiss>
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-danger-button>
+                <x-danger-button class="ms-2">
                     {{ __('Delete Account') }}
                 </x-danger-button>
             </div>

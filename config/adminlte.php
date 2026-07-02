@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'MNU Travels Admin',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>MNU</b> Travels',
+    'logo_img' => 'assets/img/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    'logo_img_alt' => 'MNU Travels',
 
     /*
     |--------------------------------------------------------------------------
@@ -256,14 +256,14 @@ return [
     |
     */
 
-    'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'use_route_url' => true,
+    'dashboard_url' => 'admin.dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
-    'password_reset_url' => 'password/reset',
-    'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'password_reset_url' => 'password.request',
+    'password_email_url' => 'password.email',
+    'profile_url' => 'admin.profile.edit',
     'disable_darkmode_routes' => false,
 
     /*
@@ -316,81 +316,139 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
+            'text' => 'Dashboard',
+            'url' => 'admin/dashboard',
+            'icon' => 'fas fa-fw fa-gauge-high',
+        ],
+
+        ['header' => 'Bookings & CRM'],
+        [
+            'text' => 'Bookings',
+            'url' => 'admin/bookings',
+            'icon' => 'fas fa-fw fa-calendar-check',
+            'can' => 'bookings.view',
         ],
         [
-            'text' => 'pages',
+            'text' => 'Enquiries',
+            'url' => 'admin/enquiries',
+            'icon' => 'fas fa-fw fa-envelope-open-text',
+            'can' => 'enquiries.view',
+        ],
+        [
+            'text' => 'Customers',
+            'url' => 'admin/customers',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'customers.view',
+        ],
+
+        ['header' => 'Fleet & Services'],
+        [
+            'text' => 'Vehicles',
+            'url' => 'admin/vehicles',
+            'icon' => 'fas fa-fw fa-car',
+            'can' => 'vehicles.view',
+        ],
+        [
+            'text' => 'Vehicle Categories',
+            'url' => 'admin/vehicle-categories',
+            'icon' => 'fas fa-fw fa-tags',
+            'can' => 'vehicle-categories.view',
+        ],
+        [
+            'text' => 'Services',
+            'url' => 'admin/services',
+            'icon' => 'fas fa-fw fa-concierge-bell',
+            'can' => 'services.view',
+        ],
+        [
+            'text' => 'Tour Packages',
+            'url' => 'admin/tour-packages',
+            'icon' => 'fas fa-fw fa-map-location-dot',
+            'can' => 'tour-packages.view',
+        ],
+
+        ['header' => 'Content'],
+        [
+            'text' => 'Testimonials',
+            'url' => 'admin/testimonials',
+            'icon' => 'fas fa-fw fa-star',
+            'can' => 'testimonials.view',
+        ],
+        [
+            'text' => 'FAQ',
+            'url' => 'admin/faqs',
+            'icon' => 'fas fa-fw fa-circle-question',
+            'can' => 'faqs.view',
+        ],
+        [
+            'text' => 'Gallery',
+            'url' => 'admin/gallery',
+            'icon' => 'fas fa-fw fa-images',
+            'can' => 'gallery.view',
+        ],
+        [
+            'text' => 'Hero Sliders',
+            'url' => 'admin/hero-sliders',
+            'icon' => 'fas fa-fw fa-panorama',
+            'can' => 'hero-sliders.view',
+        ],
+        [
+            'text' => 'Pages',
             'url' => 'admin/pages',
             'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
+            'can' => 'pages.view',
         ],
-        ['header' => 'account_settings'],
+
+        ['header' => 'Website'],
         [
-            'text' => 'profile',
+            'text' => 'Menu Manager',
+            'url' => 'admin/menus',
+            'icon' => 'fas fa-fw fa-bars',
+            'can' => 'menus.view',
+        ],
+        [
+            'text' => 'Footer Manager',
+            'url' => 'admin/footer',
+            'icon' => 'fas fa-fw fa-shoe-prints',
+            'can' => 'footer.view',
+        ],
+        [
+            'text' => 'SEO Manager',
+            'url' => 'admin/seo',
+            'icon' => 'fas fa-fw fa-magnifying-glass-chart',
+            'can' => 'seo.view',
+        ],
+        [
+            'text' => 'Contact Details',
+            'url' => 'admin/contact-details',
+            'icon' => 'fas fa-fw fa-address-book',
+            'can' => 'contact.view',
+        ],
+        [
+            'text' => 'Website Settings',
             'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-gears',
+            'can' => 'settings.view',
+        ],
+
+        ['header' => 'Administration'],
+        [
+            'text' => 'Users',
+            'url' => 'admin/users',
+            'icon' => 'fas fa-fw fa-user-gear',
+            'can' => 'users.view',
         ],
         [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Roles & Permissions',
+            'url' => 'admin/roles',
+            'icon' => 'fas fa-fw fa-user-shield',
+            'can' => 'roles.view',
         ],
         [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
+            'text' => 'Activity Log',
+            'url' => 'admin/activity-log',
+            'icon' => 'fas fa-fw fa-clock-rotate-left',
+            'can' => 'users.view',
         ],
     ],
 
