@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Models;
+
+use App\Traits\HasSeo;
+use App\Traits\LogsActivityDefaults;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Service extends Model
+{
+    use HasFactory, SoftDeletes, LogsActivityDefaults, HasSeo;
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'icon',
+        'image',
+        'short_description',
+        'description',
+        'sort_order',
+        'status',
+    ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('sort_order');
+    }
+}
