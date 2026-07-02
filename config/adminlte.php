@@ -450,6 +450,12 @@ return [
             'icon' => 'fas fa-fw fa-clock-rotate-left',
             'can' => 'users.view',
         ],
+        [
+            'text' => 'Error Log',
+            'url' => 'admin/error-log',
+            'icon' => 'fas fa-fw fa-triangle-exclamation',
+            'can' => 'users.view',
+        ],
     ],
 
     /*

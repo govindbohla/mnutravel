@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\ContactDetailController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EnquiryController;
+use App\Http\Controllers\Admin\ErrorLogController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -66,4 +68,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
 
     Route::resource('users', UserController::class)->except(['show']);
     Route::resource('roles', RoleController::class)->except(['show']);
+
+    Route::get('activity-log', [ActivityLogController::class, 'index'])->name('activity-log.index');
+    Route::get('error-log', [ErrorLogController::class, 'index'])->name('error-log.index');
 });
