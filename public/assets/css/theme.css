@@ -1,0 +1,90 @@
+/* MNU Travels - shared brand theme (no build step, plain CSS) */
+:root {
+    --mnu-primary: #1E4DB7;
+    --mnu-primary-dark: #163a8a;
+    --mnu-secondary: #D72638;
+    --mnu-bg: #F8FAFC;
+    --mnu-text: #222222;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--mnu-text);
+    background-color: var(--mnu-bg);
+}
+
+a {
+    color: var(--mnu-primary);
+}
+
+a:hover {
+    color: var(--mnu-secondary);
+}
+
+.btn-primary {
+    background-color: var(--mnu-primary);
+    border-color: var(--mnu-primary);
+    color: #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--mnu-secondary) !important;
+    border-color: var(--mnu-secondary) !important;
+    color: #fff !important;
+}
+
+.btn-outline-primary {
+    color: var(--mnu-primary);
+    border-color: var(--mnu-primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--mnu-secondary);
+    border-color: var(--mnu-secondary);
+    color: #fff;
+}
+
+.text-brand-primary {
+    color: var(--mnu-primary) !important;
+}
+
+.text-brand-secondary {
+    color: var(--mnu-secondary) !important;
+}
+
+.bg-brand-primary {
+    background-color: var(--mnu-primary) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--mnu-primary);
+    box-shadow: 0 0 0 0.2rem rgba(30, 77, 183, 0.15);
+}
+
+/* Auth pages */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--mnu-bg);
+    padding: 2rem 1rem;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+}
+
+.auth-logo {
+    max-width: 120px;
+    display: block;
+    margin: 0 auto 1.25rem;
+}
