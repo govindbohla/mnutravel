@@ -11,11 +11,13 @@ use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HeroSliderController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\TourPackageController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VehicleCategoryController;
 use App\Http\Controllers\Admin\VehicleController;
 use App\Http\Controllers\ProfileController;
@@ -61,4 +63,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
 
     Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
+
+    Route::resource('users', UserController::class)->except(['show']);
+    Route::resource('roles', RoleController::class)->except(['show']);
 });
