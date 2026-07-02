@@ -4,7 +4,12 @@ use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EnquiryController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\HeroSliderController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\TourPackageController;
 use App\Http\Controllers\Admin\VehicleCategoryController;
 use App\Http\Controllers\Admin\VehicleController;
@@ -32,4 +37,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
 
     Route::resource('tour-packages', TourPackageController::class)->except(['show']);
     Route::delete('tour-packages/{tourPackage}/gallery/{image}', [TourPackageController::class, 'destroyGalleryImage'])->name('tour-packages.gallery.destroy');
+
+    Route::resource('testimonials', TestimonialController::class)->except(['show']);
+    Route::resource('faqs', FaqController::class)->except(['show']);
+    Route::resource('gallery', GalleryController::class)->except(['show']);
+    Route::resource('hero-sliders', HeroSliderController::class)->except(['show']);
+    Route::resource('pages', PageController::class)->except(['show']);
 });

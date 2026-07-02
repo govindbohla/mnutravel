@@ -5,14 +5,24 @@ namespace App\Providers;
 use App\Repositories\Contracts\BookingRepositoryInterface;
 use App\Repositories\Contracts\CustomerRepositoryInterface;
 use App\Repositories\Contracts\EnquiryRepositoryInterface;
+use App\Repositories\Contracts\FaqRepositoryInterface;
+use App\Repositories\Contracts\GalleryRepositoryInterface;
+use App\Repositories\Contracts\HeroSliderRepositoryInterface;
+use App\Repositories\Contracts\PageRepositoryInterface;
 use App\Repositories\Contracts\ServiceRepositoryInterface;
+use App\Repositories\Contracts\TestimonialRepositoryInterface;
 use App\Repositories\Contracts\TourPackageRepositoryInterface;
 use App\Repositories\Contracts\VehicleCategoryRepositoryInterface;
 use App\Repositories\Contracts\VehicleRepositoryInterface;
 use App\Repositories\Eloquent\BookingRepository;
 use App\Repositories\Eloquent\CustomerRepository;
 use App\Repositories\Eloquent\EnquiryRepository;
+use App\Repositories\Eloquent\FaqRepository;
+use App\Repositories\Eloquent\GalleryRepository;
+use App\Repositories\Eloquent\HeroSliderRepository;
+use App\Repositories\Eloquent\PageRepository;
 use App\Repositories\Eloquent\ServiceRepository;
+use App\Repositories\Eloquent\TestimonialRepository;
 use App\Repositories\Eloquent\TourPackageRepository;
 use App\Repositories\Eloquent\VehicleCategoryRepository;
 use App\Repositories\Eloquent\VehicleRepository;
@@ -31,6 +41,11 @@ class RepositoryServiceProvider extends ServiceProvider
         VehicleRepositoryInterface::class => VehicleRepository::class,
         ServiceRepositoryInterface::class => ServiceRepository::class,
         TourPackageRepositoryInterface::class => TourPackageRepository::class,
+        TestimonialRepositoryInterface::class => TestimonialRepository::class,
+        FaqRepositoryInterface::class => FaqRepository::class,
+        GalleryRepositoryInterface::class => GalleryRepository::class,
+        HeroSliderRepositoryInterface::class => HeroSliderRepository::class,
+        PageRepositoryInterface::class => PageRepository::class,
     ];
 
     public function register(): void
