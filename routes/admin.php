@@ -1,14 +1,19 @@
 <?php
 
 use App\Http\Controllers\Admin\BookingController;
+use App\Http\Controllers\Admin\ContactDetailController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HeroSliderController;
+use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\TourPackageController;
 use App\Http\Controllers\Admin\VehicleCategoryController;
@@ -43,4 +48,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(
     Route::resource('gallery', GalleryController::class)->except(['show']);
     Route::resource('hero-sliders', HeroSliderController::class)->except(['show']);
     Route::resource('pages', PageController::class)->except(['show']);
+
+    Route::resource('menus', MenuController::class)->except(['show']);
+    Route::resource('footer', FooterController::class)->except(['show']);
+
+    Route::get('seo', [SeoController::class, 'index'])->name('seo.index');
+    Route::get('seo/{type}/{id}/edit', [SeoController::class, 'edit'])->name('seo.edit');
+    Route::put('seo/{type}/{id}', [SeoController::class, 'update'])->name('seo.update');
+
+    Route::get('contact-details', [ContactDetailController::class, 'edit'])->name('contact-details.edit');
+    Route::put('contact-details', [ContactDetailController::class, 'update'])->name('contact-details.update');
+
+    Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
 });
