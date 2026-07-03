@@ -14,7 +14,7 @@ class ContactDetailSeeder extends Seeder
             'phone' => '+91 98281 23456',
             'alt_phone' => '+91 98280 98765',
             'email' => 'info@mnutravels.com',
-            'map_iframe' => '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3556.0!2d75.7873!3d26.9124" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+            'map_iframe' => '<iframe src="https://www.google.com/maps?q=26.9124,75.7873&output=embed" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
             'business_hours' => [
                 'monday_saturday' => '24 Hours',
                 'sunday' => '24 Hours',

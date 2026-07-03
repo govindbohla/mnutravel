@@ -6,6 +6,7 @@ use App\Models\ContactDetail;
 use App\Models\Menu;
 use App\Models\Vehicle;
 use App\Support\Settings;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class FrontLayoutComposer
@@ -42,8 +43,8 @@ class FrontLayoutComposer
             'siteSettings' => [
                 'site_name' => Settings::get('site_name', 'MNU Travels'),
                 'site_tagline' => Settings::get('site_tagline'),
-                'site_logo_url' => Settings::get('site_logo_url', asset('assets/img/logo.png')),
-                'site_favicon_url' => Settings::get('site_favicon_url', asset('assets/img/logo.png')),
+                'site_logo_url' => $this->toAbsoluteUrl(Settings::get('site_logo_url', 'assets/img/logo.png')),
+                'site_favicon_url' => $this->toAbsoluteUrl(Settings::get('site_favicon_url', 'assets/img/logo.png')),
                 'whatsapp_number' => Settings::get('whatsapp_number', '+91XXXXXXXXXX'),
                 'primary_phone' => Settings::get('primary_phone'),
                 'facebook_url' => Settings::get('facebook_url'),
@@ -57,5 +58,19 @@ class FrontLayoutComposer
                 'meta_keywords' => Settings::get('meta_keywords'),
             ],
         ];
+    }
+
+    /**
+     * Settings store either a relative path (resolved against the current
+     * APP_URL/domain at render time) or an already-absolute URL (e.g. a
+     * legacy value or an external CDN link) — never bake a domain in early.
+     */
+    protected function toAbsoluteUrl(?string $path): ?string
+    {
+        if (! $path) {
+            return null;
+        }
+
+        return Str::startsWith($path, ['http://', 'https://']) ? $path : asset($path);
     }
 }

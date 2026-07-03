@@ -12,8 +12,8 @@ class SettingsSeeder extends Seeder
         $defaults = [
             'site_name' => 'MNU Travels',
             'site_tagline' => 'Safe Journey, Happy Journey',
-            'site_logo_url' => asset('assets/img/logo.png'),
-            'site_favicon_url' => asset('assets/img/logo.png'),
+            'site_logo_url' => 'assets/img/logo.png',
+            'site_favicon_url' => 'assets/img/logo.png',
             'whatsapp_number' => env('WHATSAPP_NUMBER', '+919828123456'),
             'admin_notification_email' => env('ADMIN_NOTIFICATION_EMAIL', 'admin@mnutravels.com'),
             'primary_phone' => '+91 98281 23456',

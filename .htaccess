@@ -1,0 +1,22 @@
+# Shared-hosting workaround: this project's document root is the project
+# root itself (not public/), so silently route every request into public/
+# while keeping the URL bar clean. Laravel's own public/.htaccess then
+# handles the front-controller rewrite to index.php as usual.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Defense in depth: block direct access to sensitive project files even if
+# mod_rewrite is ever disabled, since the whole project (including .env)
+# lives inside the web root on this hosting setup.
+<FilesMatch "^\.env|composer\.(json|lock)|package(-lock)?\.json|artisan|\.gitignore$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Support\Settings;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 
 class WebsiteSettingsService
 {
@@ -39,8 +40,8 @@ class WebsiteSettingsService
             $values[$key] = Settings::get($key);
         }
 
-        $values['site_logo_url'] = Settings::get('site_logo_url');
-        $values['site_favicon_url'] = Settings::get('site_favicon_url');
+        $values['site_logo_url'] = $this->toAbsoluteUrl(Settings::get('site_logo_url'));
+        $values['site_favicon_url'] = $this->toAbsoluteUrl(Settings::get('site_favicon_url'));
 
         return $values;
     }
@@ -55,12 +56,26 @@ class WebsiteSettingsService
 
         if ($logo) {
             $path = $this->imageUploadService->upload($logo, 'settings', maxWidth: 600);
-            Settings::set('site_logo_url', asset('storage/'.$path));
+            Settings::set('site_logo_url', 'storage/'.$path);
         }
 
         if ($favicon) {
             $path = $this->imageUploadService->upload($favicon, 'settings', maxWidth: 256);
-            Settings::set('site_favicon_url', asset('storage/'.$path));
+            Settings::set('site_favicon_url', 'storage/'.$path);
         }
+    }
+
+    /**
+     * Settings store either a relative path (resolved against the current
+     * APP_URL/domain at render time) or an already-absolute URL (e.g. a
+     * legacy value or an external CDN link) — never bake a domain in early.
+     */
+    protected function toAbsoluteUrl(?string $path): ?string
+    {
+        if (! $path) {
+            return null;
+        }
+
+        return Str::startsWith($path, ['http://', 'https://']) ? $path : asset($path);
     }
 }
