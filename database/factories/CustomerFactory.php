@@ -10,15 +10,22 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CustomerFactory extends Factory
 {
+    protected function withFaker(): \Faker\Generator
+    {
+        return \Faker\Factory::create('en_IN');
+    }
+
     public function definition(): array
     {
+        $city = $this->faker->city();
+
         return [
             'name' => $this->faker->name(),
-            'phone' => $this->faker->numerify('9#########'),
-            'email' => $this->faker->safeEmail(),
-            'address' => $this->faker->address(),
+            'phone' => '9'.$this->faker->numerify('#########'),
+            'email' => $this->faker->unique()->safeEmail(),
+            'address' => $this->faker->streetAddress().', '.$city.', '.$this->faker->state().' - '.$this->faker->postcode(),
             'notes' => null,
-            'status' => 'active',
+            'status' => $this->faker->randomElement(['active', 'active', 'active', 'inactive']),
         ];
     }
 }

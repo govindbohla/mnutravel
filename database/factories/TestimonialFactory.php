@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TestimonialFactory extends Factory
 {
+    protected function withFaker(): \Faker\Generator
+    {
+        return \Faker\Factory::create('en_IN');
+    }
+
     public function definition(): array
     {
         return [

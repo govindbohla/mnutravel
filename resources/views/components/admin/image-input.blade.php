@@ -5,7 +5,7 @@
 
     @if ($current)
         <div class="mb-2">
-            <img src="{{ asset('storage/'.$current) }}" class="img-thumbnail" style="max-height: 100px;">
+            <img src="{{ Str::startsWith($current, 'http') ? $current : asset('storage/'.$current) }}" class="img-thumbnail" style="max-height: 100px;">
         </div>
     @endif
 
