@@ -11,7 +11,11 @@ class TestimonialController extends Controller
     public function index(): View
     {
         return view('front.testimonials.index', [
-            'testimonials' => Testimonial::active()->latest()->paginate(12),
+            'testimonials' => Testimonial::active()
+                ->orderByDesc('rating')
+                ->orderByDesc('created_at')
+                ->take(9)
+                ->get(),
         ]);
     }
 }

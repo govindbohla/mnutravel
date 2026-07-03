@@ -35,12 +35,6 @@
                     <div class="col-12 text-center text-muted py-5">No testimonials yet.</div>
                 @endforelse
             </div>
-
-            @if ($testimonials->hasPages())
-                <div class="mt-4 d-flex justify-content-center">
-                    {{ $testimonials->links() }}
-                </div>
-            @endif
         </div>
     </section>
 @stop

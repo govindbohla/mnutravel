@@ -186,25 +186,31 @@
             <div class="container">
                 <h2 class="section-title text-center">What Our Customers Say</h2>
                 <p class="section-subtitle text-center">Real experiences from real travellers</p>
-                <div class="row g-4">
-                    @foreach ($testimonials as $testimonial)
-                        <div class="col-lg-4 col-md-6">
-                            <div class="testimonial-card shadow-sm">
-                                <div class="mb-2">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        <i class="fa-solid fa-star {{ $i <= $testimonial->rating ? 'text-warning' : 'text-muted' }}"></i>
-                                    @endfor
-                                </div>
-                                <p class="text-muted">&ldquo;{{ $testimonial->review }}&rdquo;</p>
-                                <div class="d-flex align-items-center mt-3">
-                                    @if ($testimonial->image)
-                                        <img src="{{ asset('storage/'.$testimonial->image) }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;" alt="{{ $testimonial->customer_name }}">
-                                    @endif
-                                    <strong>{{ $testimonial->customer_name }}</strong>
+
+                <div class="swiper testimonial-swiper pb-5">
+                    <div class="swiper-wrapper">
+                        @foreach ($testimonials as $testimonial)
+                            <div class="swiper-slide h-auto">
+                                <div class="testimonial-card shadow-sm h-100">
+                                    <div class="mb-2">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            <i class="fa-solid fa-star {{ $i <= $testimonial->rating ? 'text-warning' : 'text-muted' }}"></i>
+                                        @endfor
+                                    </div>
+                                    <p class="text-muted">&ldquo;{{ $testimonial->review }}&rdquo;</p>
+                                    <div class="d-flex align-items-center mt-3">
+                                        @if ($testimonial->image)
+                                            <img src="{{ asset('storage/'.$testimonial->image) }}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;" alt="{{ $testimonial->customer_name }}">
+                                        @endif
+                                        <strong>{{ $testimonial->customer_name }}</strong>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
             </div>
         </section>
@@ -249,3 +255,40 @@
     </section>
 
 @stop
+
+@push('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <style>
+        .testimonial-swiper .swiper-slide { height: auto; }
+        .testimonial-swiper .swiper-button-next,
+        .testimonial-swiper .swiper-button-prev { color: var(--mnu-primary); }
+        .testimonial-swiper .swiper-pagination-bullet-active { background: var(--mnu-primary); }
+    </style>
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        new Swiper('.testimonial-swiper', {
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            spaceBetween: 24,
+            slidesPerView: 1,
+            navigation: {
+                nextEl: '.testimonial-swiper .swiper-button-next',
+                prevEl: '.testimonial-swiper .swiper-button-prev',
+            },
+            pagination: {
+                el: '.testimonial-swiper .swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                992: { slidesPerView: 3 },
+            },
+        });
+    </script>
+@endpush

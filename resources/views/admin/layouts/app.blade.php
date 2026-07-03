@@ -5,6 +5,7 @@
 @section('css')
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs4.min.css" rel="stylesheet">
     <link href="{{ asset('assets/css/theme.css') }}" rel="stylesheet">
     <style>
         body.hold-transition, .wrapper { font-family: 'Poppins', sans-serif; }
@@ -20,13 +21,40 @@
 @section('js')
     <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-bs4.min.js"></script>
     <script>
-        $(function () {
-            $('.admin-datatable').DataTable({
+        /**
+         * Re-run on initial load and after every AJAX content swap
+         * (see admin-nav.js) so widgets inside the newly injected
+         * .content-wrapper markup are (re)initialized correctly.
+         */
+        function initAdminWidgets() {
+            var $tables = $('.admin-datatable');
+            $tables.each(function () {
+                var $table = $(this);
+                if ($.fn.DataTable.isDataTable($table)) {
+                    $table.DataTable().destroy();
+                }
+            });
+            $tables.DataTable({
                 order: [],
                 pageLength: 25,
             });
+
+            var $editors = $('.summernote-editor');
+            $editors.each(function () {
+                var $editor = $(this);
+                if ($editor.next('.note-editor').length) {
+                    $editor.summernote('destroy');
+                }
+                $editor.summernote({ height: 300 });
+            });
+        }
+
+        $(function () {
+            initAdminWidgets();
         });
     </script>
+    <script src="{{ asset('assets/js/admin-nav.js') }}"></script>
     @stack('scripts')
 @stop
